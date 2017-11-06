@@ -3,7 +3,29 @@ frontend: javascript client (minimal) with actioncable framework
 backend: ruby on rails 5 with actioncable for websockets
 database: redis for pub/sub
 
+The board must be 1000 tiles by 1000 tiles so it feels very large.
+Each tile can be painted 1 of 16 colors
+All clients must be kept in sync with the same view of the current board state, otherwise users with different versions of the board will have difficulty collaborating.
+We should support at least 100,000 simultaneous users.
+Users can place one tile every 5 minutes, so we must support an average update rate of 100,000 tiles per 5 minutes (333 updates/s).
+The configuration must be flexible in case there are unexpected bottlenecks or failures. This means that board size and tile cooldown should be adjustable on the fly in case data sizes are too large or update rates are too high.
+
 installed ubuntu windows
 then rvm
 sourced the init for rvm
 then created the project
+
+user accesses the app
+backend responds to request by delivering javascript for subscription
+the user downloads the javascript, runs it, then subscribes
+every user is a publisher too, and there's a single channel for the board data
+
+we'll use redis for pub/sub
+
+board data possibillity:
+
+https://redis.io/commands/bitfield
+
+set (x, y) value 
+
+https://redditblog.com/2017/04/13/how-we-built-rplace/
