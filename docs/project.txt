@@ -1,0 +1,9 @@
+project: clone reddit place
+frontend: javascript client (minimal) with actioncable framework
+backend: ruby on rails 5 with actioncable for websockets
+database: redis for pub/sub
+
+installed ubuntu windows
+then rvm
+sourced the init for rvm
+then created the project
